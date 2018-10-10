@@ -33,7 +33,9 @@ def ContextualTopicList():
     if project ==None or project.name != "ContextualTopic":
         project = ContextualSuggestionTopicExtraction.ContexualSuggestionTopicExtraction()
         meta_info = project.get_meta_info()
-    topic_list = project.find_high_freq_topic()
+    #topic_list = project.find_high_freq_topic()
+    #topic_list = project.find_noun_topics()
+    topic_list = project.find_topic_score()
     return jsonify(topic_list)
 
 if __name__ == '__main__':

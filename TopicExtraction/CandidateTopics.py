@@ -13,7 +13,7 @@ class NounOrNPAsCandidateTopic(AbstractCandidateTopic):
         tag_word_map = {}
         for doc in doc_list:
             tokens = self.tokenizer.tokenize(doc)
-            word_tag_list = self.pos_tagger.posTag(tokens)
+            word_tag_list = self.pos_tagger.posTags(tokens)
             for word_tag in word_tag_list:
                 if word_tag[1] not in tag_word_map:
                     tag_word_map[word_tag[1]] = []
@@ -24,5 +24,5 @@ class NounOrNPAsCandidateTopic(AbstractCandidateTopic):
         topics = []
         for tag in self.tags:
             if tag in tag_word_map:
-                topics.append(tag_word_map[tag])
+                topics += tag_word_map[tag]
         return list(set(topics))

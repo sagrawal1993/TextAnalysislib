@@ -50,9 +50,40 @@ class ContexualSuggestionTopicExtraction(AbstractProject):
         return doc_info
 
     def find_high_freq_topic(self):
-        hfreq_topic = HighFrequency()
+        hfreq_topic = HighFrefquency()
         topic_list = hfreq_topic.getTopicList(textMap.values(),1000)
         return topic_list
-#cc = ContexualSuggestionTopicExtraction()
+
+    def find_noun_topics(self):
+        from TopicExtraction.CandidateTopics import NounOrNPAsCandidateTopic
+        from TextProcessing.English.POSTagger import nltkTagger
+        from TextProcessing.English.Tokenizer import StandfordTokenizer
+        tagger = nltkTagger()
+        self.tokenizer = StandfordTokenizer()
+        topicGetter = NounOrNPAsCandidateTopic(tokenizer=self.tokenizer,pos_tagger=tagger,tag_to_consider=['NN','NNS'])
+        topic_list = topicGetter.getCandidateTopic(textMap.values())
+        return topic_list
+
+    def find_topic_score(self):
+        from TopicExtraction.CandidateTopicScore import FreqBased
+        topics = self.find_noun_topics()
+        fq = FreqBased(doc_list=textMap.values(), tokenizer=self.tokenizer)
+        return fq.getCandidateTopicScore(topics)
+
+    def find_language_model(self):
+        from LanguageModel.GenerativeModel import termBasedConsiderBackgroundModel
+        from TextProcessing.English.Tokenizer import StandfordTokenizer
+        #from LanguageModel import PretrainFreqDistro
+        from nltk.probability import FreqDist
+        self.tokenizer = StandfordTokenizer()
+        test = FreqDist(['the','the','the','the','the','the','the','the','text','text'])
+        termFreq = termBasedConsiderBackgroundModel(self.tokenizer.tokenize,test, 0.5)
+        termFreq.generateProbabilityDistribution(['text the'])
+        probDistro = termFreq.getProbabilityDistribution()
+        print(probDistro['text'],probDistro['the'])
+
+
+cc = ContexualSuggestionTopicExtraction()
+cc.find_language_model()
 #print(cc.get_meta_info())
 #print(cc.get_doc_info(0))

@@ -19,7 +19,8 @@ class HighFrequency(AbstractFindTopicList):
         freqDist = FreqDist(All_token_list)
         return freqDist.most_common(parm)
 
-class TfIdfBased(AbstractFindTopicList):
+"""class TfIdfBased(AbstractFindTopicList):
 
     def getTopicList(self,doc_list,parm):
         from sklearn.feature_extraction.text import Tf
+"""

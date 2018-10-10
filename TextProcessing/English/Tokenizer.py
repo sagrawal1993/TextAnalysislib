@@ -7,5 +7,13 @@ class StandfordTokenizer(AbstractTokenize):
     def tokenize(self,text):
         return self.nlp.word_tokenize(text)
 
+
+class NltkTokenizer(AbstractTokenize):
+
+    def tokenize(self,text):
+        from nltk import word_tokenize
+        tokens = word_tokenize(text)
+        return tokens
+
 #std = StandfordTokenizer()
 #print(std.tokenize("test text"))
