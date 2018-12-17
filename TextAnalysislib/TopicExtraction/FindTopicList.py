@@ -1,4 +1,4 @@
-from AbstractTopicExtraction import AbstractFindTopicList
+from TextAnalysislib.TopicExtraction.AbstractTopicExtraction import AbstractFindTopicList
 from nltk import FreqDist
 
 class HighFrequency(AbstractFindTopicList):

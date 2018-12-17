@@ -1,4 +1,4 @@
-from TopicExtraction.AbstractTopicExtraction import AbstractCandidateTopic
+from TextAnalysislib.TopicExtraction.AbstractTopicExtraction import AbstractCandidateTopic
 
 """
 This will cosider tokens which are Noun or NP as a candidate set.

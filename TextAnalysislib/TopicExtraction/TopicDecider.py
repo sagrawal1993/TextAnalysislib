@@ -1,4 +1,4 @@
-from TopicExtraction.AbstractTopicExtraction import AbstractTopicDecider
+from TextAnalysislib.TopicExtraction.AbstractTopicExtraction import AbstractTopicDecider
 class BasedOnBound(AbstractTopicDecider):
     def getTopicsList(self, topic_coverage_list, topic_list, parm):
         doc_topic_list = []

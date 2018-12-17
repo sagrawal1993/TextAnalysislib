@@ -1,5 +1,5 @@
 from sklearn.feature_extraction.text import CountVectorizer
-from TopicExtraction.AbstractTopicExtraction import AbstractExtractTopic
+from TextAnalysislib.TopicExtraction.AbstractTopicExtraction import AbstractExtractTopic
 
 
 class TermAsTopic(AbstractExtractTopic):

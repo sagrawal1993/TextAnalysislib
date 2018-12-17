@@ -1,7 +1,6 @@
 #!flask/bin/python
 from flask import Flask,jsonify
-import ContextualSuggestionTopicExtraction
-
+from Test import ContextualSuggestionTopicExtraction
 
 app = Flask(__name__)
 project = None

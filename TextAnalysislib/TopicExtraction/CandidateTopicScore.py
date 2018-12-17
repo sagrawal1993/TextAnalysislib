@@ -1,4 +1,4 @@
-from TopicExtraction.AbstractTopicExtraction import AbstractCandidateTopicScore
+from TextAnalysislib.TopicExtraction.AbstractTopicExtraction import AbstractCandidateTopicScore
 from nltk import FreqDist
 
 class FreqBased(AbstractCandidateTopicScore):

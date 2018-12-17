@@ -1,10 +1,10 @@
 import json
 
-from TopicExtraction import Measure
-from TopicExtraction.TermAsTopic import TermAsTopic
-from TopicExtraction.TopicDecider import BasedOnBound
-from TopicExtraction.FindTopicList import HighFrequency
-from AbstractProject import AbstractProject
+from TextAnalysislib.TopicExtraction import Measure
+from TextAnalysislib.TopicExtraction import TermAsTopic
+from TextAnalysislib.TopicExtraction import BasedOnBound
+from TextAnalysislib.TopicExtraction import HighFrequency
+from TextAnalysislib.AbstractProject import AbstractProject
 
 
 candMap = json.load(open("ContextualSuggestion/placeToTagCandidatesOnly.json"))
@@ -55,9 +55,9 @@ class ContexualSuggestionTopicExtraction(AbstractProject):
         return topic_list
 
     def find_noun_topics(self):
-        from TopicExtraction.CandidateTopics import NounOrNPAsCandidateTopic
-        from TextProcessing.English.POSTagger import nltkTagger
-        from TextProcessing.English.Tokenizer import StandfordTokenizer
+        from TextAnalysislib.TopicExtraction import NounOrNPAsCandidateTopic
+        from TextAnalysislib.TextProcessing import nltkTagger
+        from TextAnalysislib.TextProcessing import StandfordTokenizer
         tagger = nltkTagger()
         self.tokenizer = StandfordTokenizer()
         topicGetter = NounOrNPAsCandidateTopic(tokenizer=self.tokenizer,pos_tagger=tagger,tag_to_consider=['NN','NNS'])
@@ -65,14 +65,14 @@ class ContexualSuggestionTopicExtraction(AbstractProject):
         return topic_list
 
     def find_topic_score(self):
-        from TopicExtraction.CandidateTopicScore import FreqBased
+        from TextAnalysislib.TopicExtraction import FreqBased
         topics = self.find_noun_topics()
         fq = FreqBased(doc_list=textMap.values(), tokenizer=self.tokenizer)
         return fq.getCandidateTopicScore(topics)
 
     def find_language_model(self):
-        from LanguageModel.GenerativeModel import termBasedConsiderBackgroundModel
-        from TextProcessing.English.Tokenizer import StandfordTokenizer
+        from TextAnalysislib.LanguageModel import termBasedConsiderBackgroundModel
+        from TextAnalysislib.TextProcessing import StandfordTokenizer
         #from LanguageModel import PretrainFreqDistro
         from nltk.probability import FreqDist
         self.tokenizer = StandfordTokenizer()

@@ -1,4 +1,4 @@
-from TextProcessing.AbstractTextProcessing import AbstractPOSTags
+from TextAnalysislib.TextProcessing.AbstractTextProcessing import AbstractPOSTags
 class nltkTagger(AbstractPOSTags):
 
     def posTags(self,token_list):

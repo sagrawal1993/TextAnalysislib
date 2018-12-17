@@ -1,4 +1,4 @@
-from TextProcessing.AbstractTextProcessing import AbstractStemmer
+from TextAnalysislib.TextProcessing.AbstractTextProcessing import AbstractStemmer
 
 class PorterStemmer(AbstractStemmer):
     def __init__(self):

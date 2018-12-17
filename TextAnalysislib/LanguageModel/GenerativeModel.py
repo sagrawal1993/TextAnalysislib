@@ -1,4 +1,4 @@
-from LanguageModel.AbstractLanguageModel import AbstractGenerativeModel
+from TextAnalysislib.LanguageModel.AbstractLanguageModel import AbstractGenerativeModel
 from nltk.probability import FreqDist
 
 """

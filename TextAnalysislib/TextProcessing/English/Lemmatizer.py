@@ -1,4 +1,4 @@
-from TextProcessing.AbstractTextProcessing import AbstractLemmatizer
+from TextAnalysislib.TextProcessing.AbstractTextProcessing import AbstractLemmatizer
 
 #word net also take postag along with tokens that will give different result.
 class WordNet(AbstractLemmatizer):

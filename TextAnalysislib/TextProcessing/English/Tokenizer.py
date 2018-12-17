@@ -1,4 +1,4 @@
-from TextProcessing.AbstractTextProcessing import AbstractTokenize
+from TextAnalysislib.TextProcessing.AbstractTextProcessing import AbstractTokenize
 class StandfordTokenizer(AbstractTokenize):
     def __init__(self):
         from stanfordcorenlp import StanfordCoreNLP
