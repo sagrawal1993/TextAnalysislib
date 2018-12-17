@@ -1,0 +1,2 @@
+stanfordcorenlp
+gensim
