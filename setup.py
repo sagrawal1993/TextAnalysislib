@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(
     name = "TextAnalysislib",
-    packages = ["TextAnalysislib"],
+    packages = ["TextAnalysislib", "TextAnalysislib.TextEmbedding", "TextAnalysislib.ArticleSpinner", "TextAnalysislib.LanguageModel", "TextAnalysislib.TextProcessing", "TextAnalysislib.TextProcessing.English", "TextAnalysislib.TextSummarization", "TextAnalysislib.TopicExtraction", "TextAnalysislib.SimmilarTextRemover"],
     version = "0.0.2",
     description = "General function required for personal uses.",
     author = "Suraj Agrawal",

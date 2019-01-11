@@ -7,7 +7,7 @@ class TermAsTopic(AbstractExtractTopic):
         self.analyzer = analyzer
         print("Started TermAsTopic")
 
-    def getTopicCoverage(self,doc_list, topics_list):
+    def getTopicCoverage(self, doc_list, topics_list):
         self.topic_list = topics_list
         feature_map = {}
         for i in range(len(topics_list)):
