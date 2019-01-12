@@ -1,2 +1,6 @@
 stanfordcorenlp
 gensim
+nltk
+scikit-learn
+spacy
+twitter

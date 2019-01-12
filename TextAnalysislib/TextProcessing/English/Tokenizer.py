@@ -4,7 +4,7 @@ class StandfordTokenizer(AbstractTokenize):
         from stanfordcorenlp import StanfordCoreNLP
         self.nlp = StanfordCoreNLP('/home/suraj/stanford-corenlp-full-2018-02-27')
 
-    def tokenize(self,text):
+    def tokenize(self, text):
         return self.nlp.word_tokenize(text)
 
 
