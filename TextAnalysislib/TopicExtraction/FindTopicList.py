@@ -57,6 +57,20 @@ class HighFrequency(AbstractFindTopicList):
             curr_set = list(curr_map.keys())
         return query_map
 
+    def topic_support_list(self, freq_dist):
+        support_map = {}
+        for key1, value1 in freq_dist:
+            key1_set = set(key1.split(" "))
+            for key2, value2 in freq_dist:
+                key2_set = set(key2.split(" "))
+                if len(key1_set.intersection(key2_set)) == len(key1_set):
+                    if key1 not in support_map:
+                        support_map[key1] = []
+                    support_map[key1].append((key2, float(value2)/float(value1)))
+        return support_map
+
+
+
 
 class AssociationRuleBased(AbstractFindTopicList):
     def __init__(self, analyzer=None, n_gram_boost_map={}):
