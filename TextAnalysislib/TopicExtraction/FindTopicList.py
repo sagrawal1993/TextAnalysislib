@@ -83,7 +83,11 @@ class AssociationRuleBased(AbstractFindTopicList):
     def __get_filter_topic_from_rule(self, association_rules):
         topic_list = []
         for item in association_rules:
-            topic_list.append(str(item[0]))
+            pair = item[0]
+            topic = ""
+            for x in pair:
+                topic += x + " "
+            topic_list.append(topic)
         return topic_list
 
 
