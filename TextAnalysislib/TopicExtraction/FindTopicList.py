@@ -8,10 +8,15 @@ class HighFrequency(AbstractFindTopicList):
 
     def getTopicList(self, doc_list, parm):
         from sklearn.feature_extraction.text import CountVectorizer
+        from TextAnalysislib.TextProcessing.English.Stopwords import Stopword
+
+        all = ["nltk", "sklearn", "spacy", "yoast", "humbolt", "googlehistory", "sql", "longlist"]
+        stopword = Stopword(all)
+        stopword_list = stopword.getStopword()
         if self.analyzer==None:
             print("No custom Analyser given")
             self.vectorizer = CountVectorizer(ngram_range=(1, 3), lowercase=True,
-                                                  stop_words='english')
+                                                  stop_words=stopword_list)
             self.analyzer = self.vectorizer.build_analyzer()
         All_token_list = []
         for doc in doc_list:
