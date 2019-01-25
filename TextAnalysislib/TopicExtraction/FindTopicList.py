@@ -58,6 +58,34 @@ class HighFrequency(AbstractFindTopicList):
         return query_map
 
 
+class AssociationRuleBased(AbstractFindTopicList):
+    def __init__(self, analyzer=None, n_gram_boost_map={}):
+        self.analyzer = analyzer
+        self.n_gram_boost_map = n_gram_boost_map
+
+    def getTopicList(self, doc_list, parm):
+        from sklearn.feature_extraction.text import CountVectorizer
+        from analysislib.datamining import AssociationRuleMining
+
+        self.rule_miner = AssociationRuleMining.getAssociationRuleMiner("aprior")
+        if self.analyzer==None:
+            print("No custom Analyser given")
+            self.vectorizer = CountVectorizer(lowercase=True,
+                                                  stop_words='english')
+            self.analyzer = self.vectorizer.build_analyzer()
+        tokenize_doc_list = []
+        for doc in doc_list:
+            token_list = self.analyzer(doc)
+            tokenize_doc_list.append(token_list)
+        associatoin_rules = self.rule_miner.getRule(tokenize_doc_list)
+        return self.__get_filter_topic_from_rule(associatoin_rules)
+
+    def __get_filter_topic_from_rule(self, association_rules):
+        topic_list = []
+        for item in association_rules:
+            topic_list.append(str(item[0]))
+        return topic_list
+
 
 """class TfIdfBased(AbstractFindTopicList):
 
