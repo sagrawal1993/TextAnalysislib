@@ -1,7 +1,10 @@
 from TextAnalysislib.TextProcessing.AbstractTextProcessing import AbstractStopword
+import os
 
+self_obj = __import__(__name__)
+abs_pth = os.path.dirname(self_obj.__file__)
 def load_stopword(file_name):
-    stopword_list = open("StopwordFile/" + file_name).read().strip().split("\n")
+    stopword_list = open( os.path.join(abs_pth,"TextProcessing/English/StopwordFile/" + file_name)).read().strip().split("\n")
     return stopword_list
 
 def get_stopword_list(type_name):   

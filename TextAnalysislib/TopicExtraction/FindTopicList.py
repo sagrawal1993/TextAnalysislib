@@ -39,6 +39,15 @@ class HighFrequency(AbstractFindTopicList):
         for key, value in freq_dist:
             curr_map[key] = value
 
+        new_map = self.filter_map(curr_map)
+        #while len(new_map) != len(curr_map):
+        #   curr_map = new_map
+        #    new_map = self.filter_map(curr_map)
+        return new_map
+
+
+    def filter_map(self, curr_map):
+
         query_map = {}
         curr_set = list(curr_map.keys())
         while len(curr_set) > 0:

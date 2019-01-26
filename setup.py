@@ -1,11 +1,12 @@
 from distutils.core import setup
 setup(
     name = "TextAnalysislib",
-    packages = ["TextAnalysislib", "TextAnalysislib.TextEmbedding", "TextAnalysislib.InformationRetrival", "TextAnalysislib.ArticleSpinner", "TextAnalysislib.LanguageModel", "TextAnalysislib.TextProcessing", "TextAnalysislib.TextProcessing.English", "TextAnalysislib.TextSummarization", "TextAnalysislib.TopicExtraction", "TextAnalysislib.SimmilarTextRemover"],
+    packages = ["TextAnalysislib", "TextAnalysislib.TextEmbedding","TextAnalysislib.TextProcessing.English.StopwordFile", "TextAnalysislib.InformationRetrival", "TextAnalysislib.ArticleSpinner", "TextAnalysislib.LanguageModel", "TextAnalysislib.TextProcessing", "TextAnalysislib.TextProcessing.English", "TextAnalysislib.TextSummarization", "TextAnalysislib.TopicExtraction", "TextAnalysislib.SimmilarTextRemover"],
     version = "0.0.2",
     description = "General function required for personal uses.",
     author = "Suraj Agrawal",
     author_email = "s.agrawal1993@gmail.com",
+    package_data = {"TextAnalysislib.TextProcessing.English.StopwordFile" :['*']},
     url = "http://weekendtrip.co.in/",
     download_url = "",
     keywords = ["encoding", "i18n", "xml"],
