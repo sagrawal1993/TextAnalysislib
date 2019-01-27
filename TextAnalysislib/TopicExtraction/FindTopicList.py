@@ -3,16 +3,15 @@ from nltk import FreqDist
 
 class HighFrequency(AbstractFindTopicList):
     def __init__(self, analyzer=None, n_gram_boost_map={}):
+        from TextAnalysislib.TextProcessing.English.Stopwords import Stopword
         self.analyzer = analyzer
         self.n_gram_boost_map = n_gram_boost_map
+        all = ["nltk", "sklearn", "spacy", "yoast", "humbolt", "googlehistory", "sql", "longlist"]
+        self.stopword = Stopword(all)
 
     def getTopicList(self, doc_list, parm):
         from sklearn.feature_extraction.text import CountVectorizer
-        from TextAnalysislib.TextProcessing.English.Stopwords import Stopword
-
-        all = ["nltk", "sklearn", "spacy", "yoast", "humbolt", "googlehistory", "sql", "longlist"]
-        stopword = Stopword(all)
-        stopword_list = stopword.getStopword()
+        stopword_list = self.stopword.getStopword()
         if self.analyzer==None:
             print("No custom Analyser given")
             self.vectorizer = CountVectorizer(ngram_range=(1, 3), lowercase=True,
