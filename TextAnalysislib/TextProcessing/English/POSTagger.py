@@ -1,20 +1,5 @@
 from TextAnalysislib.TextProcessing.AbstractTextProcessing import AbstractPOSTags
 
-def getPOSTagger(pos_tagger="nltk", param_map={}):
-    """
-    give the POSTagger instance to POSTag the token list.
-    :param pos_tagger: name of the postagger to be used.
-    :type pos_tagger: string
-    :param param_map: paramters requires to instantiate the param_map
-    :type param_map: dict
-    :return: POSTagger instance
-    :rtype: AbstractPOSTags
-    """
-    if pos_tagger == "standford":
-        return standfordTagger()
-    return nltkTagger()
-
-
 class nltkTagger(AbstractPOSTags):
 
     def posTags(self, token_list):

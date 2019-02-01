@@ -6,7 +6,7 @@ pip install Distance, this contains various method to calculate distance between
 
 """
 from TextAnalysislib.TextProcessing.English.Stopwords import Stopword
-from TextAnalysislib.TextProcessing.English import Tokenizer
+from TextAnalysislib.TextProcessing import English
 
 class CommonToken:
     """
@@ -16,7 +16,7 @@ class CommonToken:
     def __init__(self, toeknizer="nltk", stopwords=["nltk"]):
         stopword = Stopword(stopwords)
         self.stopwords = set(stopword.getStopword())
-        self.tokenizer = Tokenizer.getTokenizer(toeknizer)
+        self.tokenizer = English.getTokenizer(toeknizer)
 
     def similarity(self, string1, string2):
         string1_tokens = set(self.tokenizer.tokenize(string1)).difference(self.stopwords)
