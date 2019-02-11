@@ -13,15 +13,17 @@ class AbstractEmbedding:
 
 class Word2VecWordEmbedding(AbstractEmbedding):
 
-    def __init__(self, min_count, size, window, doc_embedding="centroid", tokenizer=None, stopword=None, preprocessor=None, analyzer=None):
+    def __init__(self, min_count, size, window, doc_embedding="centroid", tokenizer=None, stopword=None, preprocessor=None, analyzer=None, iter=300):
         print("Started Word2VecEmbedding.")
         self.doc_embedder = clustering.getClusterEmbeddingFromPoints(doc_embedding)
         self.min_count = min_count
         self.size = size
         self.window = window
+        self.iter = iter
         if tokenizer is None:
-            from TextAnalysislib.TextProcessing.English import Tokenizer
-            self.tokenizer = Tokenizer.getTokenizer("nltk").tokenize
+            from TextAnalysislib.TextProcessing import English
+            tokenizer = English.getTokenizer("nltk")
+            self.tokenizer = tokenizer.tokenize
         else:
             self.tokenizer = tokenizer
         if stopword is None:
@@ -35,7 +37,8 @@ class Word2VecWordEmbedding(AbstractEmbedding):
     def __create_token_string(self, text):
         if self.analyzer is not None:
             return self.analyzer(text)
-        text = self.preprocessor(text)
+        if self.preprocessor is not None:
+            text = self.preprocessor(text)
         token_list = self.tokenizer(text)
         final_token_list = []
         for token in token_list:
@@ -44,12 +47,12 @@ class Word2VecWordEmbedding(AbstractEmbedding):
         return final_token_list
 
 
-    def fit(self, sentence_list, model_file=None):
+    def fit(self, sentence_list=[], model_file=None):
         final_sentence_list = []
         for sentence in sentence_list:
             final_sentence_list.append(self.__create_token_string(sentence))
         if model_file is None:
-            self.model = Word2Vec(final_sentence_list, min_count=self.min_count, size=self.size, window=self.window)
+            self.model = Word2Vec(final_sentence_list, min_count=self.min_count, size=self.size, window=self.window, iter=self.iter)
         else:
             self.model = Word2Vec.load(model_file)
         return
