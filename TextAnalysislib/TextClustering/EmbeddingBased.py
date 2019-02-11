@@ -17,7 +17,7 @@ class TextEmbeddingBased:
             self.__clustering = clustering
 
     def fit(self, doc_list):
-        self.vector_list = self.__embedding.fit_transform(doc_list)
+        self.vector_list = self.__embedding.fit_transform(doc_list).toarray()
         self.__clustering.fit(self.vector_list)
         self.label = self.__clustering.labels_
 
@@ -34,7 +34,9 @@ class TextEmbeddingBased:
         for cluster_id in cluster_index_map:
             vector_list = [self.vector_list[i] for i in cluster_index_map[cluster_id]]
             index_score_list = ClusterRepresentative.closer_to_centroid(vector_list, distance.euclidean)
+            score_index_list = []
             for tuple in index_score_list:
-                tuple[1] = cluster_index_map[cluster_id][tuple[1]]
-            cluster_score_map[cluster_id] = index_score_list
+                tmp = cluster_index_map[cluster_id][tuple[1]]
+                score_index_list.append((tuple[0], tmp ))
+            cluster_score_map[cluster_id] = score_index_list 
         return cluster_score_map
