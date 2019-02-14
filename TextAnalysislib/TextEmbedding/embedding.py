@@ -15,7 +15,7 @@ class Word2VecWordEmbedding(AbstractEmbedding):
 
     def __init__(self, min_count, size, window, doc_embedding="centroid", tokenizer=None, stopword=None, preprocessor=None, analyzer=None, iter=300):
         print("Started Word2VecEmbedding.")
-        self.doc_embedder = clustering.getClusterEmbeddingFromPoints(doc_embedding)
+        self.doc_embedder = clustering.getClusterEmbeddingFromPoints(doc_embedding, {"dim": size})
         self.min_count = min_count
         self.size = size
         self.window = window
@@ -66,8 +66,9 @@ class Word2VecWordEmbedding(AbstractEmbedding):
             return None
         return self.model[word]
 
-    def get_doc_embedding(self, word_list):
+    def get_doc_embedding(self, doc):
         word_vec_list = []
+        word_list = self.__create_token_string(doc)
         for word in word_list:
             if word in self.model.wv.vocab:
                 word_vec_list.append(self.model[word])
