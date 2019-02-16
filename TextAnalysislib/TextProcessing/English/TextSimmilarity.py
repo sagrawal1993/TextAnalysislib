@@ -23,9 +23,10 @@ class CommonToken:
         string2_tokens = set(self.tokenizer.tokenize(string2)).difference(self.stopwords)
 
         common_tokens = string1_tokens.intersection(string2_tokens)
+        total_tokens = string1_tokens.union(string2_tokens)
         if max(len(string2_tokens), len(string1_tokens)) == 0:
             return 0.0
-        simmilarity = len(common_tokens)/max(len(string2_tokens), len(string1_tokens))
+        simmilarity = len(common_tokens)/len(total_tokens)
         return simmilarity
 
 
