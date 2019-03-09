@@ -34,7 +34,7 @@ class Word2VecWordEmbedding(AbstractEmbedding):
         self.preprocessor = preprocessor
         self.analyzer = analyzer
 
-    def __create_token_string(self, text):
+    def create_token_string(self, text):
         if self.analyzer is not None:
             return self.analyzer(text)
         if self.preprocessor is not None:
@@ -50,7 +50,7 @@ class Word2VecWordEmbedding(AbstractEmbedding):
     def fit(self, sentence_list=[], model_file=None):
         final_sentence_list = []
         for sentence in sentence_list:
-            final_sentence_list.append(self.__create_token_string(sentence))
+            final_sentence_list.append(self.create_token_string(sentence))
         if model_file is None:
             self.model = Word2Vec(final_sentence_list, min_count=self.min_count, size=self.size, window=self.window, iter=self.iter)
         else:
@@ -68,7 +68,7 @@ class Word2VecWordEmbedding(AbstractEmbedding):
 
     def get_doc_embedding(self, doc):
         word_vec_list = []
-        word_list = self.__create_token_string(doc)
+        word_list = self.create_token_string(doc)
         for word in word_list:
             if word in self.model.wv.vocab:
                 word_vec_list.append(self.model[word])
@@ -82,6 +82,6 @@ class Word2VecWordEmbedding(AbstractEmbedding):
     def transform(self, doc_list):
         doc_embedding_list = []
         for doc in doc_list:
-            doc_embedding = self.get_doc_embedding(self.__create_token_string(doc))
+            doc_embedding = self.get_doc_embedding(self.create_token_string(doc))
             doc_embedding_list.append(doc_embedding)
         return doc_embedding_list
