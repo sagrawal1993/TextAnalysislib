@@ -61,3 +61,18 @@ def getStemmer(stemmer_name="porter", paramter_map={}):
     if stemmer_name is "porter":
         return Stemmer.PorterStemmer()
     return Stemmer.PorterStemmer()
+
+def getAnalyser(analyser_name="tag_token", parameter_map={}):
+    """
+
+    :param analyser_name: name of the analyser, whose instance required to process.
+    :type analyser_name: String.
+    :param parameter_map: parameters required by the analyser.
+    :type parameter_map: dict
+    :return: object of type anlayzer.
+    :rtype: Analyser
+    """
+    if analyser_name == "tag_token":
+        from TextAnalysislib.TextProcessing.English.Analyser import POSTagToken
+        return POSTagToken(**parameter_map)
+    return None
