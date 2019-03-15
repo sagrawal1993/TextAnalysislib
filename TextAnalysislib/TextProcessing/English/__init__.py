@@ -43,6 +43,8 @@ def getPOSTagger(pos_tagger="nltk", param_map={}):
     from TextAnalysislib.TextProcessing.English import POSTagger
     if pos_tagger == "standford":
         return POSTagger.standfordTagger()
+    elif pos_tagger == "spacy":
+        return POSTagger.spacyTagger()
     return POSTagger.nltkTagger()
 
 

@@ -2,8 +2,9 @@ from TextAnalysislib.TextProcessing.AbstractTextProcessing import AbstractPOSTag
 
 class nltkTagger(AbstractPOSTags):
 
-    def posTags(self, token_list):
+    def posTags(self, text):
         import nltk
+        token_list = nltk.tokenize.word_tokenize(text,'en')
         return nltk.pos_tag(token_list)
 
 #standford tagger takes whole text as a string.
@@ -17,8 +18,24 @@ class standfordTagger(AbstractPOSTags):
         token_tag = self.nlp.pos_tag(text)
         return token_tag
 
+class spacyTagger(AbstractPOSTags):
+    """
+    This pos tagger will use spacy to get the POS tag from the text.
+    """
+    def __init__(self):
+        import spacy
+        self.nlp = spacy.load('en')
 
-# test = standfordTagger()
-# #test = nltkTagger()
-# print(test.posTags("This is a test string. \n\nAnother string is also given along with it."))
+    def posTags(self, text):
+        doc = self.nlp(text)
+        tag_list = []
+        for token in doc:
+            tag_list.append((token.text, token.tag_))
+        return tag_list
+
+"""
+test = standfordTagger()
+test = spacyTagger()
+print(test.posTags("This is a test string. \n\nAnother string is also given along with it."))
 # #print(test.posTags(["this", "is", "a", "test string"]))
+"""

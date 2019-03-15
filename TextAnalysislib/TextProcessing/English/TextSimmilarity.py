@@ -13,14 +13,18 @@ class CommonToken:
     This will give the percent of tokens common between two strings.
     It will give the score on the scale of [0,1].
     """
-    def __init__(self, toeknizer="nltk", stopwords=["nltk"]):
+    def __init__(self, toeknizer="nltk", stopwords=["nltk"], analyser=None):
         stopword = Stopword(stopwords)
+        if analyser is not None:
+            self.tokenize = analyser
+        else:
+            self.tokenize = English.getTokenizer(toeknizer).tokenize
         self.stopwords = set(stopword.getStopword())
-        self.tokenizer = English.getTokenizer(toeknizer)
+
 
     def similarity(self, string1, string2):
-        string1_tokens = set(self.tokenizer.tokenize(string1)).difference(self.stopwords)
-        string2_tokens = set(self.tokenizer.tokenize(string2)).difference(self.stopwords)
+        string1_tokens = set(self.tokenize(string1)).difference(self.stopwords)
+        string2_tokens = set(self.tokenize(string2)).difference(self.stopwords)
 
         common_tokens = string1_tokens.intersection(string2_tokens)
         total_tokens = string1_tokens.union(string2_tokens)
