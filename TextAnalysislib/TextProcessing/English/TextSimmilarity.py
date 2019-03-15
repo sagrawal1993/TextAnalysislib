@@ -12,6 +12,11 @@ class CommonToken:
     """
     This will give the percent of tokens common between two strings.
     It will give the score on the scale of [0,1].
+
+    >>tst = CommonToken()
+    >>print(tst.similarity("my name is suraj agrawal", "nikhil agrawal is going to hoshiarpur."))
+    >>0.14285714285714285
+
     """
     def __init__(self, toeknizer="nltk", stopwords=["nltk"], analyser=None):
         stopword = Stopword(stopwords)
@@ -34,5 +39,4 @@ class CommonToken:
         return simmilarity
 
 
-# tst = CommonToken()
-# print(tst.similarity("my name is suraj agrawal", "nikhil agrawal is going to hoshiarpur."))
+

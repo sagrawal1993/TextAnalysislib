@@ -78,3 +78,19 @@ def getAnalyser(analyser_name="tag_token", parameter_map={}):
         from TextAnalysislib.TextProcessing.English.Analyser import POSTagToken
         return POSTagToken(**parameter_map)
     return None
+
+
+def getTextSimmilarity(sim_method="token_IOU", parameter_map={}):
+    """
+
+    :param sim_method: the method to find the similarity between two string.
+    :type sim_method: string
+    :param parameter_map: parameters required by the method.
+    :type parameter_map: dict
+    :return: instance of similarity method.
+    :rtype: double.
+    """
+    if sim_method=="token_IOU":
+        from TextAnalysislib.TextProcessing.English.TextSimmilarity import CommonToken
+        return CommonToken(**parameter_map)
+    return None
