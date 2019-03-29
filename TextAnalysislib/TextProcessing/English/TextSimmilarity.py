@@ -18,7 +18,7 @@ class CommonToken:
     >>0.14285714285714285
 
     """
-    def __init__(self, toeknizer="nltk", stopwords=["nltk"], analyser=None):
+    def __init__(self, toeknizer="nltk", stopwords=["nltk", "topic"], analyser=None):
         stopword = Stopword(stopwords)
         if analyser is not None:
             self.tokenize = analyser

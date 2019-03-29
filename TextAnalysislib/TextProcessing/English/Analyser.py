@@ -33,6 +33,6 @@ class POSTagToken(AbstractAnalyzer):
         for pair in tag_token_list:
             #print(pair)
             if self.rematch.match(pair[1]) != None:
-                final_text_list.append(pair[0])
+                final_text_list.append(pair[0].lower())
         return final_text_list
 

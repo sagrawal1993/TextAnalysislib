@@ -24,6 +24,8 @@ def get_stopword_list(type_name):
         stopwords = load_stopword("SQLStopword")
     elif type_name == "longlist":
         stopwords = load_stopword("LongStopword")
+    elif type_name == "topic":
+        stopwords = load_stopword("TopicStopword")
     else:
         stopwords = load_stopword("DefaultEnglish")
     return list(set(stopwords))
@@ -76,6 +78,7 @@ class Stopword(AbstractStopword):
         googlehistory
         sql
         longlist
+        topic
         :param stopword_from: list of names from where stopwords need to fetch.
         :type list:
         """

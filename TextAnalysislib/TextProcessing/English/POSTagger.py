@@ -12,7 +12,7 @@ class standfordTagger(AbstractPOSTags):
 
     def __init__(self):
         from stanfordcorenlp import StanfordCoreNLP
-        self.nlp = StanfordCoreNLP('/home/suraj/stanford-corenlp-full-2018-02-27')
+        self.nlp = StanfordCoreNLP('/home/suraj/stanford-corenlp-full-2018-10-05')
 
     def posTags(self, text):
         token_tag = self.nlp.pos_tag(text)
