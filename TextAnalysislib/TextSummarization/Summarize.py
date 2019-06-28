@@ -6,7 +6,13 @@ from gensim.summarization import keywords
 from gensim.summarization import summarize
 
 def get_summary(content):
-    return summarize(content)
+    try:
+        if len(content) < 100:
+            return content
+        summ = summarize(content, ratio=0.02)
+    except:
+        summ = ""
+    return summ
 
 def get_keyword(content):
     return keywords(content).split("\n")
